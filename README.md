@@ -27,50 +27,43 @@ I started by creating a Virtual Machine in Azure. Think of this as buying a new 
 ---
 
 ### 2. Making the Server a "Boss" (Domain Controller)
-I installed **Active Directory** to turn my server into a "Domain Controller." This means this server now controls all the users and computers in my fake company, `mario.local`. 
+I installed **Active Directory** to turn my server into a "Domain Controller." I used the wizard to add the necessary features and then verified everything was healthy on the dashboard.
 
 <p align="center">
-<img src="img/03_server_manager_roles.png" height="80%" width="80%" alt="AD Setup"/>
-<br />
-<em>This is the dashboard showing that Active Directory is ready to go.</em>
+  <img src="img/01_ad_install.jpg" width="45%" />
+  <img src="img/02_server_dashboard.jpg" width="45%" />
+  <br />
+  <em>Left: Installing the AD role | Right: My server dashboard is all green and ready!</em>
 </p>
 
----
-
-### 3. Organizing the Office
-I created **Organizational Units (OUs)**, which are basically just digital folders. I made separate folders for "Admins" and "Staff" so everything stays organized.
+### 3. Organizing the Office (OUs & Groups)
+I created "Folders" (Organizational Units) to keep admins and employees separate. I also created **Security Groups** (like 'Mushroom_Kingdom_Admins') so I can give the right people access to the right files.
 
 <p align="center">
-<img src="img/05_ou_structure.png" height="80%" width="80%" alt="Folders"/>
-<br />
-<em>My folder setup for the different departments.</em>
+  <img src="img/03_creating_folders.jpg" width="31%" />
+  <img src="img/04_creating_groups.jpg" width="31%" />
+  <img src="img/05_adding_members.jpg" width="31%" />
+  <br />
+  <em>Creating folders, making VIP groups, and assigning permissions.</em>
 </p>
 
----
-
-### 4. Creating Users & Managing Permissions
-This was the fun part! I created users (like Luigi) and practiced:
-- Setting up their usernames.
-- Putting them in "Groups" (so they can only see files they are allowed to see).
-- Resetting passwords and unlocking accounts.
-
-**Note:** I even ran into some login issues with my "Luigi" user, which taught me how important it is to check the "Member Of" tab and the login suffix!
+### 4. Bulk Onboarding with PowerShell
+Instead of creating 10 users manually, I wrote a simple script to create them all at once. This shows how I can use automation to save time and prevent mistakes during the onboarding process.
 
 <p align="center">
-<img src="img/08_member_of_tab.png" height="80%" width="80%" alt="User Groups"/>
-<br />
-<em>Checking which groups my users belong to.</em>
+  <img src="img/06_powershell_script.jpg" width="45%" />
+  <img src="img/07_automated_users_list.jpg" width="45%" />
+  <br />
+  <em>Left: My script running in PowerShell | Right: All the new users created automatically!</em>
 </p>
 
----
-
-### 5. Using the "Command Line"
-I practiced using **PowerShell** to find my users quickly without clicking through menus. It’s a much faster way to see what's happening on the server.
+### 5. Setting the "Office Rules" (Group Policy)
+I set up a security rule that locks an account if someone tries the wrong password 3 times. This is a key part of keeping the company safe from hackers.
 
 <p align="center">
-<img src="img/12_powershell_users.png" height="80%" width="80%" alt="PowerShell"/>
+<img src="img/08_security_rules.jpg" height="80%" width="80%">
 <br />
-<em>Using simple commands to list all the users I created.</em>
+<em>Setting the "3 strikes and you're out" password rule.</em>
 </p>
 
 ---
