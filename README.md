@@ -84,6 +84,14 @@ I practiced using **PowerShell** to find my users quickly without clicking throu
 
 ---
 
+## What I Learned
+- How to set up a cloud environment from scratch.
+- How to manage users and keep them in the right groups.
+- **Most importantly:** I learned how to troubleshoot when things don't go as planned!
+
+
+---
+
 ## Conclusion: Why This Lab Matters
 
 Building this environment from scratch taught me that Active Directory is the "heart" of a company's IT system. It’s not just about creating accounts; it’s about making sure the right people have access to the right things at the right time.
@@ -94,8 +102,3 @@ Through this project, I gained confidence in:
 3. **The "Security First" Mindset:** I learned that small settings, like a Group Policy or a "Least Privilege" rule, are what keep a company's data safe from outside threats.
 
 This lab has prepared me to walk into a professional environment and confidently assist users with their most common (and most critical) technical needs.
-
-## What I Learned
-- How to set up a cloud environment from scratch.
-- How to manage users and keep them in the right groups.
-- **Most importantly:** I learned how to troubleshoot when things don't go as planned!
