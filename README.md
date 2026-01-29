@@ -75,6 +75,14 @@ I practiced using **PowerShell** to find my users quickly without clicking throu
 
 ---
 
+## Key Concepts I Focused On
+
+- **Least Privilege:** I only gave users the access they needed for their specific roles.
+- **PII Protection:** I organized the data to ensure sensitive information stays private.
+- **Scalability:** I built the system so it's easy to add 5 users or 500 users.
+- **Security Posture:** I used GPOs to enforce strong password rules and account lockouts.
+
+
 ## What I Learned
 - How to set up a cloud environment from scratch.
 - How to manage users and keep them in the right groups.
