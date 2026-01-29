@@ -30,8 +30,8 @@ I started by creating a Virtual Machine in Azure. Think of this as buying a new 
 I installed **Active Directory** to turn my server into a "Domain Controller." I used the wizard to add the necessary features and then verified everything was healthy on the dashboard.
 
 <p align="center">
-  <img src="img/01_ad_install.jpg" width="45%" />
-  <img src="img/02_server_dashboard.jpg" width="45%" />
+  <img src="img/01_ad_install.jpg.png" width="45%" />
+  <img src="img/02_server_dashboard.jpg.png" width="45%" />
   <br />
   <em>Left: Installing the AD role | Right: My server dashboard is all green and ready!</em>
 </p>
@@ -40,9 +40,9 @@ I installed **Active Directory** to turn my server into a "Domain Controller." I
 I created "Folders" (Organizational Units) to keep admins and employees separate. I also created **Security Groups** (like 'Mushroom_Kingdom_Admins') so I can give the right people access to the right files.
 
 <p align="center">
-  <img src="img/03_creating_folders.jpg" width="31%" />
-  <img src="img/04_creating_groups.jpg" width="31%" />
-  <img src="img/05_adding_members.jpg" width="31%" />
+  <img src="img/03_creating_folders.jpg.png" width="31%" />
+  <img src="img/04_creating_groups.jpg.png" width="31%" />
+  <img src="img/05_adding_members.jpg.png" width="31%" />
   <br />
   <em>Creating folders, making VIP groups, and assigning permissions.</em>
 </p>
@@ -51,8 +51,8 @@ I created "Folders" (Organizational Units) to keep admins and employees separate
 Instead of creating 10 users manually, I wrote a simple script to create them all at once. This shows how I can use automation to save time and prevent mistakes during the onboarding process.
 
 <p align="center">
-  <img src="img/06_powershell_script.jpg" width="45%" />
-  <img src="img/07_automated_users_list.jpg" width="45%" />
+  <img src="img/06_powershell_script.jpg.png" width="45%" />
+  <img src="img/07_automated_users_list.jpg.png" width="45%" />
   <br />
   <em>Left: My script running in PowerShell | Right: All the new users created automatically!</em>
 </p>
@@ -61,7 +61,7 @@ Instead of creating 10 users manually, I wrote a simple script to create them al
 I set up a security rule that locks an account if someone tries the wrong password 3 times. This is a key part of keeping the company safe from hackers.
 
 <p align="center">
-<img src="img/08_security_rules.jpg" height="80%" width="80%">
+<img src="img/08_security_rules.jpg.png" height="80%" width="80%">
 <br />
 <em>Setting the "3 strikes and you're out" password rule.</em>
 </p>
