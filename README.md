@@ -1,97 +1,44 @@
-# My Azure & Active Directory Lab: Learning the Basics
+# Azure Active Directory Lab: On-Premises AD DS in a Cloud-Hosted Environment
 
-## What is this project?
-I built this lab to get hands-on experience with the tools used in a professional Help Desk environment. Instead of just reading about it, I wanted to actually build a "mini-company" from scratch in the cloud. 
+## Overview
+This lab simulates a corporate Active Directory environment deployed on Windows Server 2022, hosted in Microsoft Azure. The goal was to replicate the user lifecycle management and access control workflows found in a real enterprise IT environment — from initial domain configuration through bulk user provisioning, OU structuring, security group management, and GPO enforcement.
 
-This project shows how I set up a server, created a network, and managed a group of users (like a real IT department would).
+## What Was Built
+Domain Controller Deployment:
+Provisioned a Windows Server 2022 VM in Azure and promoted it to Domain Controller via the AD DS role installation wizard. Configured the forest and domain from scratch, then validated domain health through Server Manager and dcdiag
 
-## The Tools I Used
-- **Microsoft Azure:** My "virtual office" where the server lives.
-- **Windows Server 2022:** The "brain" of the operation.
-- **Active Directory:** The tool I used to manage people, passwords, and permissions.
-- **Remote Desktop:** How I connected to the server from my own laptop.
+Organizational Unit Structure:
+Designed an OU hierarchy mirroring a corporate org chart — separating administrative accounts from standard users to enforce policy boundaries and maintain least-privilege access control. OU design directly determines GPO inheritance, so this step was treated as a foundational security decision, not just an organizational preference.
 
----
+Security Group Configuration:
+Created role-based security groups and assigned users according to their access tier. Group membership controls resource permissions rather than assigning access at the individual user level — consistent with RBAC best practices.
 
-## What I Did (Step-by-Step)
+Bulk User Provisioning via PowerShell:
+Wrote a PowerShell script to automate the creation of multiple user accounts simultaneously, including proper OU placement and group assignments. This reflects real onboarding workflows where manual account creation at scale introduces both inefficiency and human error.
 
-### 1. Building the Server
-I started by creating a Virtual Machine in Azure. Think of this as buying a new computer and plugging it into a cloud network. I had to set up the "security guards" (Network Security Groups) to make sure I could log in safely.
-
-<p align="center">
-<img src="img/01_azure_vm_status.png" height="80%" width="80%" alt="My Azure Server"/>
-<br />
-<em>My server is up and running in the Azure portal!</em>
-</p>
+Group Policy Object (GPO) Enforcement:
+Created and linked a GPO to enforce an account lockout policy: accounts lock after 3 failed login attempts. This was applied at the domain level and validated against test accounts to confirm inheritance and enforcement.
 
 ---
 
-### 2. Making the Server a "Boss" (Domain Controller)
-I installed **Active Directory** to turn my server into a "Domain Controller." I used the wizard to add the necessary features and then verified everything was healthy on the dashboard.
+## Key Concepts Applied
 
-<p align="center">
-  <img src="img/01_ad_install.jpg.png" width="45%" />
-  <img src="img/02_server_dashboard.jpg.png" width="45%" />
-  <br />
-  <em>Left: Installing the AD role | Right: My server dashboard is all green and ready!</em>
-</p>
+Least Privilege Access Control: Users were provisioned with only the permissions required for their role. Admin-tier accounts were kept in a separate OU from standard users.
 
-### 3. Organizing the Office (OUs & Groups)
-I created "Folders" (Organizational Units) to keep admins and employees separate. I also created **Security Groups** (like 'Mushroom_Kingdom_Admins') so I can give the right people access to the right files.
+RBAC via Security Groups: Access is assigned to groups, not individuals. This simplifies both provisioning and deprovisioning, and keeps access auditable.
 
-<p align="center">
-  <img src="img/03_creating_folders.jpg.png" width="31%" />
-  <img src="img/04_creating_groups.jpg.png" width="31%" />
-  <img src="img/05_adding_members.jpg.png" width="31%" />
-  <br />
-  <em>Creating folders, making VIP groups, and assigning permissions.</em>
-</p>
+GPO as a Security Baseline Tool: Group Policy was used to enforce account lockout thresholds across the domain, demonstrating how policy can be used to harden an environment without touching individual machines.
 
-### 4. Bulk Onboarding with PowerShell
-Instead of creating 10 users manually, I wrote a simple script to create them all at once. This shows how I can use automation to save time and prevent mistakes during the onboarding process.
-
-<p align="center">
-  <img src="img/06_powershell_script.jpg.png" width="45%" />
-  <img src="img/07_automated_users_list.jpg.png" width="45%" />
-  <br />
-  <em>Left: My script running in PowerShell | Right: All the new users created automatically!</em>
-</p>
-
-### 5. Setting the "Office Rules" (Group Policy)
-I set up a security rule that locks an account if someone tries the wrong password 3 times. This is a key part of keeping the company safe from hackers.
-
-<p align="center">
-<img src="img/08_security_rules.jpg.png" height="80%" width="80%">
-<br />
-<em>Setting the "3 strikes and you're out" password rule.</em>
-</p>
+Automation for Consistency: Bulk provisioning via PowerShell reduces the risk of misconfigured accounts during onboarding and mirrors how IT teams manage user creation at scale.
 
 ---
 
-## Key Concepts I Focused On
-
-- **Least Privilege:** I only gave users the access they needed for their specific roles.
-- **PII Protection:** I organized the data to ensure sensitive information stays private.
-- **Scalability:** I built the system so it's easy to add 5 users or 500 users.
-- **Security Posture:** I used GPOs to enforce strong password rules and account lockouts.
+## Troubleshooting Encountered
+Part of building this environment involved working through real configuration issues — including RDP connectivity problems related to NSG inbound rules, and verifying that GPOs were correctly linked and applying to the intended OUs using gpresult and rsop.msc. These weren't scripted problems with scripted answers — they required reading logs, checking configurations, and iterating until the environment behaved as expected.
 
 ---
 
-## What I Learned
-- How to set up a cloud environment from scratch.
-- How to manage users and keep them in the right groups.
-- **Most importantly:** I learned how to troubleshoot when things don't go as planned!
-
-
----
-
-## Conclusion: Why This Lab Matters
-
-Building this environment from scratch taught me that Active Directory is the "heart" of a company's IT system. It’s not just about creating accounts; it’s about making sure the right people have access to the right things at the right time.
-
-Through this project, I gained confidence in:
-1. **Cloud Basics:** I’m now comfortable navigating the Azure portal and managing virtual servers.
-2. **The "User Lifecycle":** I understand the full journey of an employee’s access—from their first day of onboarding to managing their security permissions as they grow with the company.
-3. **The "Security First" Mindset:** I learned that small settings, like a Group Policy or a "Least Privilege" rule, are what keep a company's data safe from outside threats.
+## Conclusion: Why This Lab Matters for Help Desk
+The majority of help desk tickets in an AD-managed environment touch this infrastructure directly — account lockouts, password resets, group membership issues, access requests, and onboarding. Understanding how the backend is configured makes it significantly easier to diagnose and resolve those tickets accurately and efficiently, rather than following a script without understanding the underlying system.
 
 This lab has prepared me to walk into a professional environment and confidently assist users with their most common (and most critical) technical needs.
